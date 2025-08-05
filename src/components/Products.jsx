@@ -10,7 +10,7 @@ const Products = ({name,price,desc,image}) => {
 
 
      
-      <Image src={image} width={300} height={400} alt="product image"/>
+      {/* <Image src={image} width={300} height={400} alt="product image"/> */}
       
     </div>
   )

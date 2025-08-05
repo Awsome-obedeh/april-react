@@ -3,6 +3,7 @@ import Card from "@/components/Card";
 import Jokes from "@/components/Jokes";
 import Navbar from "@/components/Navbar";
 import Products from "@/components/Products";
+import Traveljornal from "@/components/Traveljornal";
 import Image from "next/image";
 
 export default function Home({}) {
@@ -32,6 +33,8 @@ export default function Home({}) {
     pass the name, price and descriptions using props*/}
  
       <Applications/>
+
+      <Traveljornal/>
 
     </>
 

@@ -53,7 +53,7 @@ const Applications = () => {
   return (
     <div className="flex gap-5">
       {applicants.map(applicant=>(
-        <ApplicantCard applicant={applicant}/>
+        <ApplicantCard applicant={applicant} key={applicant.id}/>
       ))}
     </div>
   )
