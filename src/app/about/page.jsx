@@ -1,5 +1,6 @@
 
 "use client"
+import Counter from '@/components/Counter'
 import React, { useState } from 'react'
 
 const AboutPage = () => {
@@ -23,6 +24,8 @@ const AboutPage = () => {
 
         <button onClick={handleClick} className="bg-white px-10 mt-3 rounded-md py-2 text-black ">No</button>
       </div>
+
+      <Counter/>
     </div>
   )
 }
