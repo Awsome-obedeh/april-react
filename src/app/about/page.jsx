@@ -1,6 +1,7 @@
 
 "use client"
 import Counter from '@/components/Counter'
+import Todo from '@/components/Todo'
 import React, { useState } from 'react'
 
 const AboutPage = () => {
@@ -26,6 +27,7 @@ const AboutPage = () => {
       </div>
 
       <Counter/>
+      <Todo/>
     </div>
   )
 }
