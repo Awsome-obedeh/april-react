@@ -12,7 +12,13 @@ const Todo = () => {
         const newTask = e.target[0].value
         console.log(newTask)
         // add the new value of task to the tasks array
-        setTasks([...tasks, newTask])
+        if(!newTask){
+            alert("pass in task todo")
+        }
+        else{
+
+            setTasks([...tasks, newTask])
+        }
        
 
     }
