@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Products from "@/components/Products";
 import Traveljornal from "@/components/Traveljornal";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home({}) {
   return (
@@ -35,6 +36,8 @@ export default function Home({}) {
       <Applications/>
 
       <Traveljornal/>
+
+      <Link href='/register'>Register</Link>
 
     </>
 
