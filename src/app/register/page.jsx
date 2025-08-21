@@ -46,7 +46,7 @@ const page = () => {
   return (
     <div className="flex justify-center items-center mx-auto flex-col w-full h-full">
 
-      <form action="" onSubmit={handleSubmit}>
+      <form  onSubmit={handleSubmit}>
         {err && ( <p className='bg-red-600 text-white rounded-md px-4 text-center  '>{err}</p>)}
        
             <label htmlFor="" className="text-2xl">Firstname</label>
