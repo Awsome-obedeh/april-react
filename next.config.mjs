@@ -23,6 +23,13 @@ images: {
 
         
       },
+      {
+        protocol: 'https',
+        hostname: 'i.imgflip.com',
+       
+
+        
+      },
     ],
   },
 };
