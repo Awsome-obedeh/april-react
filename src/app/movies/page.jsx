@@ -1,6 +1,7 @@
 "use client"
 import { getTop } from '@/lib/fetch'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
@@ -27,11 +28,14 @@ const page = () => {
             {
                 animes ? 
                 animes.map((anime) => (
-                    <div className="border border-white rounded-md relative h-60 w-60 bg-red-500 bg-cover bg-center bg-no-repeat ">
+                    <>
+                    <Link href={`/movies/${anime.title}`} key={anime.title} className="border border-white rounded-md relative h-30 w-60 bg-red-500 bg-cover bg-center bg-no-repeat ">
 
-                        {/* <Image width={500} height={500} src={data.} alt='image tilte' className='w-full h-full bg-cover' /> */}
-                        <p className='absolute bottom-5 left-3 underline'>{data.title}</p>
-                    </div>
+                        <Image width={500} height={200} src={anime.images.jpg.image_url} alt='image tilte' className='w-full h-full bg-cover' />
+                        <p className='absolute bottom-5 left-3 underline'>{anime.title}</p>
+                    </Link>
+                        <p className='w-60'>{anime.synopsis?.slice(0,50)}....</p>
+                    </>
                 )) : "loadin...."
             }
 

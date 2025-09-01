@@ -3,9 +3,10 @@ export const getTop=async (endpoint)=>{
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '8211e87e56msh7bc643da62dc703p1842dcjsn92dd720f35fa',
-            'x-rapidapi-host': 'animedb1.p.rapidapi.com'
-        }
+		'x-rapidapi-key': 'a472fc7f59msh7d744cf527d5f69p1a62a2jsn69ad3577dc02',
+		'x-rapidapi-host': 'animedb1.p.rapidapi.com'
+	}
+         
     };
 
     try {
@@ -17,6 +18,26 @@ export const getTop=async (endpoint)=>{
     } catch (error) {
         console.error(error);
     }
+}
+
+export async function getAnime(anime,pageNumber){
+    const url = `https://animedb1.p.rapidapi.com/anime?q=${anime}&page=${pageNumber}`;
+const options = {
+	method: 'GET',
+	headers: {
+		'x-rapidapi-key': '8211e87e56msh7bc643da62dc703p1842dcjsn92dd720f35fa',
+		'x-rapidapi-host': 'animedb1.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.text();
+    return result
+	// console.log(result);
+} catch (error) {
+	console.error(error);
+}
 }
 
 function sum(a,b){

@@ -19,3 +19,10 @@ export async function handleSubmit(formData){
         // challenge- get all checked boxes values from the object
     
 }
+
+export const loginForm=async ()=>{
+        const username=formData.get('username')
+        const password=formData.get('password')
+}
+
+
