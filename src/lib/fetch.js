@@ -3,7 +3,7 @@ export const getTop=async (endpoint)=>{
     const options = {
         method: 'GET',
         headers: {
-		'x-rapidapi-key': 'a472fc7f59msh7d744cf527d5f69p1a62a2jsn69ad3577dc02',
+		'x-rapidapi-key': process.env.RAPID_API_KEY,
 		'x-rapidapi-host': 'animedb1.p.rapidapi.com'
 	}
          

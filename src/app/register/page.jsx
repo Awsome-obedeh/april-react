@@ -32,8 +32,16 @@ const page = () => {
 
         else{
             setErrmsg('')
-            // sumbit fom
-            console.log("form submitted")
+            // send form data to api
+
+            const res=fetch('api/signup', {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({firstname,lastname,password})
+
+            })
         }
             
         
