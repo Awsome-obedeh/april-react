@@ -4,6 +4,7 @@
 
 import dbConnection from "@/lib/dbConnect"
 import userModel from "@/models/users"
+import bcrypt from "bcryptjs"
 
 
 export const POST = async (req) => {
@@ -18,11 +19,14 @@ export const POST = async (req) => {
 
         // call the databsse connection
         await dbConnection()
+        // before storing user detaisl in the db, hash user password
+        const salt= bcrypt.genSaltSync(16)
+        const hashedPassword=bcrypt.hashSync(password, salt)
         // store the user data in the database
         const user = new userModel({
             firstname: firstname,
             lastname: lastname,
-            password: password
+            password: hashedPassword
         })
 
         // create new user in the database

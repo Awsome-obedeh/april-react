@@ -1,17 +1,20 @@
 
 "use client"
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 const page = () => {
+    const router=useRouter()
     const [firstname, setFirstname]=useState('')
     const [lastname, setLastname]=useState('')
     const [password, setPassword]=useState('')
     const [err, setErrmsg]= useState('')
+    const [loading,setLoading]=useState(false)
 
 
 
     // function to handle submit
-    const handleSubmit=(e)=>{
+    const handleSubmit=async (e)=>{
         // prevent default form submission
         e.preventDefault()
 
@@ -31,10 +34,11 @@ const page = () => {
         }
 
         else{
+            setLoading(true)
             setErrmsg('')
             // send form data to api
 
-            const res=fetch('api/signup', {
+            const res=await fetch('api/signup', {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -42,6 +46,12 @@ const page = () => {
                 body:JSON.stringify({firstname,lastname,password})
 
             })
+            // const data=await res.json()
+            if(res.ok){
+                // route the user to login page
+                router.push('/login')
+            }
+            
         }
             
         
@@ -67,10 +77,12 @@ const page = () => {
         </div>
             <label htmlFor="" className="text-2xl">Password</label>
         <div className="w-full border-1 border-white my-3">
+          
             <input onChange={(e)=> setPassword(e.target.value)} type="text" className='outline-none  pt-3 px-4 w-full' />
         </div>
 
-        <button className="bg-green-400 txt-white px-4 py-2 mx-auto">Submit </button>
+        <button disabled={loading? true :false} className={` ${loading?'bg-green-300 text-black' :'bg-green-500'} text-white px-4 py-2 mx-auto `}>   {loading ? (<span className='font-bold'>loading..</span>) : "Submit"} </button>
+       
       </form>
 
 
