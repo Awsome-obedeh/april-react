@@ -23,7 +23,7 @@ export const POST = async (req) => {
         const salt= bcrypt.genSaltSync(16)
         const hashedPassword=bcrypt.hashSync(password, salt)
         // store the user data in the database
-        const user = new userModel({
+         const user = new userModel({
             firstname: firstname,
             lastname: lastname,
             password: hashedPassword

@@ -14,7 +14,7 @@ export default function SignupForm() {
     const [usernameErr, setUsernameErr]=useState('')
     const [passwordErr, setPasswordErr]=useState('')
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=async (e)=>{
         // prevent form deafult submit
 
         e.preventDefault()
@@ -27,19 +27,23 @@ export default function SignupForm() {
             
         }
         // if the username and password input is filled up
+        
         if(username && password){
+                const userPassword=password
+
             console.log("sent")
             setPasswordErr('')
             setUsernameErr('')
-            // compare username sent by the user to the one we have
-            if(username===correctUsername && password===correctPassword){
-                // user logged in succefully- route user to the movies page
-                router.replace('/movies')
-                
-            }
-            else{
-                setUsernameErr("user info is invalid")
-            }
+           
+            // send user credentials to the API(/api/login)
+            const res= await fetch('/api/login', {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({username,userPassword})
+            
+            })
         }
     }
     return (
@@ -58,7 +62,7 @@ export default function SignupForm() {
                         
                         
                     />
-                   {usernameErr && <label htmlFor="" className="text-red-700">{usernameErr}</label>}
+                   {username.length < 1 && <label htmlFor="" className="text-red-700">{usernameErr}</label>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-900 mb-2" htmlFor="lastName">Password</label>
@@ -71,14 +75,14 @@ export default function SignupForm() {
                         
                     />
 
-                   { passwordErr && <label htmlFor="" className="text-red-700">{passwordErr}</label>}
+                   { password.length <1  && <label htmlFor="" className="text-red-700">{passwordErr}</label>}
                 </div>
                 
                 <button
                     type="submit"
                     className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
                 >
-                    Sign Up
+                   login
                 </button>
             </form>
         </div>
