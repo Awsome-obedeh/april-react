@@ -1,10 +1,13 @@
 
 "use client"
+import { signIn, useSession } from "next-auth/react"
+import { redirect } from "next/dist/server/api-utils"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function SignupForm() {
     const router=useRouter()
+    const session=useSession()
     const correctUsername="webdev"
     const correctPassword="April@2025"
 
@@ -12,7 +15,9 @@ export default function SignupForm() {
     const [password, setPassword]=useState("")
 
     const [usernameErr, setUsernameErr]=useState('')
+    const [err, setErr]=useState(false)
     const [passwordErr, setPasswordErr]=useState('')
+    console.log(session)
 
     const handleSubmit=async (e)=>{
         // prevent form deafult submit
@@ -34,21 +39,36 @@ export default function SignupForm() {
             console.log("sent")
             setPasswordErr('')
             setUsernameErr('')
-           
-            // send user credentials to the API(/api/login)
-            const res= await fetch('/api/login', {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify({username,userPassword})
+
+            // using nextAuth sign in method to login
+            const res= await signIn("credentials", {password,username, redirect: false})
+            console.log(res)
+
+            if(res.error){
+                setErr("Invalid credentials")
+            }  
             
-            })
+            if(res.ok && !res.error){
+                // redirect to dashboard
+                router.push('/movies')
+            }
+            // send user credentials to the API(/api/login)
+            // const res= await fetch('/api/login', {
+            //     method:"POST",
+            //     headers:{
+            //         "Content-Type":"application/json"
+            //     },
+            //     body: JSON.stringify({username,userPassword})
+            
+            // })
         }
     }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-sm">
+
+         { err && (<p className="bg-red-600 text-white px-6 py-3 mx-auto ">{err}</p>) }
+
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Sign Up</h2>
                 <div className="mb-4">
                     <label className="block text-gray-900 mb-2" htmlFor="firstName">Username</label>
